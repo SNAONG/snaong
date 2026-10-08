@@ -181,7 +181,7 @@ footer{background:var(--navy-dark);color:var(--white);padding:70px 0 26px}
   </div>
 </section>
 
-<section class="ca-section">
+<section class="ca-section" id="sec-ca">
   <div class="container">
     <div class="section-head reveal">
       <span class="eyebrow">Organes dirigeants</span>
@@ -192,7 +192,7 @@ footer{background:var(--navy-dark);color:var(--white);padding:70px 0 26px}
   </div>
 </section>
 
-<section class="cc-section" style="background:var(--surface)">
+<section class="cc-section" id="sec-cc" style="background:var(--surface)">
   <div class="container">
     <div class="section-head reveal">
       <span class="eyebrow">Contrôle</span>
@@ -203,15 +203,17 @@ footer{background:var(--navy-dark);color:var(--white);padding:70px 0 26px}
   </div>
 </section>
 
-<section class="coord-section">
+<section class="coord-section" id="sec-de">
   <div class="container">
     <div class="section-head reveal">
       <span class="eyebrow">Direction Exécutive</span>
       <h2>Le Coordonnateur Général</h2>
     </div>
-    <div id="direction-slot"></div>
+    <div id="direction-slot" style="display:grid;gap:24px"></div>
   </div>
 </section>
+
+<div id="extra-sections"></div>
 
 <section class="cta-don">
   <div class="container cta-box">
@@ -307,10 +309,6 @@ footer{background:var(--navy-dark);color:var(--white);padding:70px 0 26px}
   const modalDesc = document.getElementById('modal-desc');
   const modalTags = document.getElementById('modal-tags');
 
-  function initials(name){
-    return name.split(' ').filter(Boolean).slice(0,2).map(w => w[0]).join('').toUpperCase();
-  }
-
   function openModal(card){
     const name = card.dataset.name;
     const role = card.dataset.role;
@@ -338,8 +336,10 @@ footer{background:var(--navy-dark);color:var(--white);padding:70px 0 26px}
   /* ---- Chargement de l'équipe depuis Google Sheet CSV ---- */
   const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSMFnO43ctZMNrTQN2GWTwCxbKGE7yTtAN-Ryv35dBLV174GkOj64TeOHNJTDmpf1mHqwUdo9acz4oj/pub?gid=0&single=true&output=csv";
 
-  // Secours si le Sheet est vide ou inaccessible — liste officielle CA/CC/DE
-  const FALLBACK = [
+  // Membres officiels connus : toujours affichés. Si le Sheet contient le même nom
+  // (peu importe la casse, les accents ou l'ordre des mots), le Sheet complète/remplace
+  // la fiche (photo, description, poste) sans doublon.
+  const OFFICIELS = [
     {nom:"Mamam Sanni", poste:"Coordonnateur Général", categorie:"direction", photo:"", description:"Premier responsable de la Direction Exécutive de SNA-ONG. Il assure la gestion quotidienne de l'organisation, représente SNA au plan national et international, et est l'interlocuteur privilégié des partenaires techniques et financiers."},
     {nom:"Mouton Philippe Robert", poste:"Président du CA", categorie:"ca", photo:"", description:"Représentant légal de l'ONG, il convoque et préside les sessions de l'Assemblée Générale ainsi que les réunions du Conseil d'Administration."},
     {nom:"Seidou Mouhamed Sabirou", poste:"Secrétaire du CA", categorie:"ca", photo:"", description:"Tient les documents administratifs de l'organisation et assiste le Président dans l'exercice de ses fonctions."},
@@ -350,22 +350,49 @@ footer{background:var(--navy-dark);color:var(--white);padding:70px 0 26px}
     {nom:"Idrissou Adjaratou", poste:"Rapporteur du Comité de Contrôle", categorie:"controle", photo:"", description:"Membre du Comité de Contrôle chargé de rédiger les rapports de contrôle."}
   ];
 
-  // Ordre officiel des postes par catégorie — s'applique même si le Sheet est désordonné
+  // Ordre officiel des postes par catégorie connue
   const ORDRE_POSTE = {
-    ca: ["président", "secrétaire", "trésorier", "trésorière", "chargé des affaires sociales et de l'emploi", "chargé de la formation et de l'information"],
-    controle: ["président", "rapporteur"],
-    direction: ["coordonnateur général"]
+    ca: ["president", "secretaire", "tresorier", "tresoriere", "charge des affaires sociales et de l'emploi", "charge de la formation et de l'information"],
+    controle: ["president", "rapporteur"],
+    direction: ["coordonnateur general"]
   };
+
+  /* ---- Utilitaires ---- */
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const plain = s => String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  const nameKey = s => plain(s).split(/[^a-z0-9]+/).filter(Boolean).sort().join(' ');
+
+  // Catégories connues : reconnues malgré les variantes d'écriture
+  function catKnown(raw){
+    const c = plain(raw).replace(/[^a-z0-9]/g, '');
+    if(!c) return '';
+    if(c === 'ca' || c.startsWith('conseil')) return 'ca';
+    if(c === 'cc' || c.includes('controle')) return 'controle';
+    if(c === 'de' || c.includes('direction') || c.includes('coordonnateur') || c.includes('coordinateur')) return 'direction';
+    return '';
+  }
+  // Clé de regroupement des catégories inconnues (insensible casse/accents/pluriel)
+  function catKey(raw){
+    return plain(raw).split(/[^a-z0-9]+/).filter(Boolean).map(w => w.length > 3 ? w.replace(/[sx]$/, '') : w).join(' ');
+  }
+  function catLabel(raw){
+    const t = String(raw || '').trim().replace(/\s+/g, ' ');
+    return t.charAt(0).toUpperCase() + t.slice(1);
+  }
 
   function rangPoste(categorie, poste){
     const liste = ORDRE_POSTE[categorie] || [];
-    const p = (poste || '').toLowerCase();
+    const p = plain(poste);
     const i = liste.findIndex(ref => p.includes(ref));
     return i === -1 ? liste.length : i;
   }
-
-  function sortByPosteOrder(list, categorie){
-    return [...list].sort((a, b) => rangPoste(categorie, a.poste) - rangPoste(categorie, b.poste));
+  // Officiels d'abord (ordre officiel des postes), puis les nouveaux dans l'ordre du Sheet
+  function sortKnown(list, categorie){
+    return list.map((m, i) => ({m, i})).sort((a, b) =>
+      ((b.m.official ? 1 : 0) - (a.m.official ? 1 : 0)) ||
+      (rangPoste(categorie, a.m.poste) - rangPoste(categorie, b.m.poste)) ||
+      (a.i - b.i)
+    ).map(x => x.m);
   }
 
   function parseCSV(text){
@@ -389,25 +416,66 @@ footer{background:var(--navy-dark);color:var(--white);padding:70px 0 26px}
     return rows.filter(r => r.some(v => v.trim() !== ''));
   }
 
+  // Seule la colonne "nom" est indispensable. Les autres sont facultatives et
+  // les en-têtes sont reconnus sans tenir compte des accents/majuscules.
   function csvToMembers(text){
-    const rows = parseCSV(text);
+    const rows = parseCSV(text.replace(/^\uFEFF/, ''));
     if(rows.length < 2) return null;
-    const headers = rows[0].map(h => h.trim().toLowerCase());
+    const headers = rows[0].map(h => plain(h).replace(/[^a-z0-9]/g, ''));
+    const find = (...names) => headers.findIndex(h => names.includes(h));
     const idx = {
-      nom: headers.indexOf('nom'),
-      poste: headers.indexOf('poste'),
-      categorie: headers.indexOf('categorie'),
-      photo: headers.indexOf('photo'),
-      description: headers.indexOf('description')
+      nom: find('nom', 'name'),
+      poste: find('poste', 'fonction', 'role'),
+      categorie: find('categorie', 'category', 'section', 'groupe'),
+      photo: find('photo', 'image', 'photourl'),
+      description: find('description', 'bio', 'profil')
     };
-    if(idx.nom === -1 || idx.poste === -1 || idx.categorie === -1) return null;
+    if(idx.nom === -1) return null;
+    const get = (r, i) => i > -1 ? (r[i] || '').trim() : '';
     return rows.slice(1).map(r => ({
-      nom: (r[idx.nom]||'').trim(),
-      poste: (r[idx.poste]||'').trim(),
-      categorie: (r[idx.categorie]||'').trim().toLowerCase(),
-      photo: idx.photo > -1 ? (r[idx.photo]||'').trim() : '',
-      description: idx.description > -1 ? (r[idx.description]||'').trim() : ''
-    })).filter(m => m.nom && m.categorie);
+      nom: get(r, idx.nom),
+      poste: get(r, idx.poste),
+      categorie: get(r, idx.categorie),
+      photo: get(r, idx.photo),
+      description: get(r, idx.description)
+    })).filter(m => m.nom);
+  }
+
+  // Fusion officiels + Sheet, sans doublon (clé = nom normalisé)
+  function buildTeam(sheetMembers){
+    const byKey = new Map();
+    OFFICIELS.forEach(o => byKey.set(nameKey(o.nom), Object.assign({}, o, {official:true})));
+    (sheetMembers || []).forEach(m => {
+      const k = nameKey(m.nom);
+      const known = byKey.get(k);
+      if(known){
+        if(m.poste) known.poste = m.poste;
+        if(m.photo) known.photo = m.photo;
+        if(m.description) known.description = m.description;
+      } else {
+        byKey.set(k, Object.assign({}, m, {official:false}));
+      }
+    });
+    return [...byKey.values()];
+  }
+
+  // Classement : 3 catégories connues + une section par catégorie inconnue
+  function classify(members){
+    const known = {direction:[], ca:[], controle:[]};
+    const extras = new Map();
+    members.forEach(m => {
+      const c = catKnown(m.categorie);
+      if(c){ known[c].push(m); return; }
+      const key = catKey(m.categorie) || '__autres';
+      if(!extras.has(key)) extras.set(key, {label: String(m.categorie).trim() ? catLabel(m.categorie) : 'Autres membres', list: []});
+      extras.get(key).list.push(m);
+    });
+    return {
+      direction: sortKnown(known.direction, 'direction'),
+      ca: sortKnown(known.ca, 'ca'),
+      controle: sortKnown(known.controle, 'controle'),
+      extras: [...extras.values()]
+    };
   }
 
   function initials(name){
@@ -418,9 +486,10 @@ footer{background:var(--navy-dark);color:var(--white);padding:70px 0 26px}
   function avatarHTML(member, size){
     const cls = size === 'lg' ? 'avatar-lg' : 'avatar-sm' + (member.nom !== 'Poste à pourvoir' ? ' filled' : '');
     if(member.photo){
-      return `<img src="${member.photo}" alt="${member.nom}" class="${cls}" style="object-fit:cover">`;
+      // Si la photo ne charge pas, on retombe sur les initiales
+      return `<img src="${esc(member.photo)}" alt="${esc(member.nom)}" class="${cls}" style="object-fit:cover" onerror="var d=document.createElement('div');d.className='${cls}';d.textContent='${esc(initials(member.nom))}';this.replaceWith(d)">`;
     }
-    return `<div class="${cls}">${initials(member.nom)}</div>`;
+    return `<div class="${cls}">${esc(initials(member.nom))}</div>`;
   }
 
   function bindCard(el, member){
@@ -430,50 +499,70 @@ footer{background:var(--navy-dark);color:var(--white);padding:70px 0 26px}
     el.addEventListener('click', () => openModal(el));
   }
 
+  function renderGrid(slot, list){
+    slot.innerHTML = list.map(m => `
+      <div class="team-card${m.nom === 'Poste à pourvoir' ? ' empty' : ''}" data-member>
+        ${avatarHTML(m,'sm')}
+        <h4>${m.nom === 'Poste à pourvoir' ? 'À pourvoir' : esc(m.nom)}</h4>
+        <div class="role">${esc(m.poste)}</div>
+      </div>`).join('');
+    slot.querySelectorAll('[data-member]').forEach((el,i) => bindCard(el, list[i]));
+  }
+
   function renderTeam(members){
-    const direction = sortByPosteOrder(members.filter(m => m.categorie === 'direction'), 'direction');
-    const ca = sortByPosteOrder(members.filter(m => m.categorie === 'ca'), 'ca');
-    const controle = sortByPosteOrder(members.filter(m => m.categorie === 'controle'), 'controle');
+    const g = classify(members);
 
+    // Direction Exécutive
     const directionSlot = document.getElementById('direction-slot');
+    directionSlot.innerHTML = g.direction.map(m => `
+      <div class="coord-card reveal visible" data-member>
+        ${avatarHTML(m,'lg')}
+        <div class="coord-info">
+          <span class="coord-badge">${esc(m.poste) === 'Coordonnateur Général' ? 'Coordonnateur Général' : 'Direction Exécutive'}</span>
+          <h3>${esc(m.nom)}</h3>
+          <div class="role">${esc(m.poste)}</div>
+          <p>${esc(m.description)}</p>
+          <span class="coord-cta">Voir le profil →</span>
+        </div>
+      </div>`).join('');
+    directionSlot.querySelectorAll('[data-member]').forEach((el,i) => bindCard(el, g.direction[i]));
+    document.getElementById('sec-de').style.display = g.direction.length ? '' : 'none';
+
+    // Conseil d'Administration et Comité de Contrôle
     const caSlot = document.getElementById('ca-slot');
-    const controleSlot = document.getElementById('controle-slot');
+    const ccSlot = document.getElementById('controle-slot');
+    renderGrid(caSlot, g.ca);
+    renderGrid(ccSlot, g.controle);
+    caSlot.classList.add('visible');
+    ccSlot.classList.add('visible');
+    document.getElementById('sec-ca').style.display = g.ca.length ? '' : 'none';
+    document.getElementById('sec-cc').style.display = g.controle.length ? '' : 'none';
 
-    if(direction.length){
-      directionSlot.innerHTML = direction.map(m => `
-        <div class="coord-card reveal visible" data-member>
-          ${avatarHTML(m,'lg')}
-          <div class="coord-info">
-            <span class="coord-badge">Coordonnateur Général</span>
-            <h3>${m.nom}</h3>
-            <div class="role">${m.poste}</div>
-            <p>${m.description || ''}</p>
-            <span class="coord-cta">Voir le profil →</span>
+    // Catégories inconnues : une section chacune, sous les sections connues
+    const host = document.getElementById('extra-sections');
+    host.innerHTML = '';
+    g.extras.forEach((grp, i) => {
+      const n = grp.list.length;
+      const sec = document.createElement('section');
+      sec.style.background = i % 2 === 0 ? 'var(--surface)' : 'var(--white)';
+      sec.innerHTML = `
+        <div class="container">
+          <div class="section-head reveal visible">
+            <span class="eyebrow">Équipe</span>
+            <h2>${esc(grp.label)}</h2>
+            <p>${n} membre${n > 1 ? 's' : ''}</p>
           </div>
-        </div>`).join('');
-      directionSlot.querySelectorAll('[data-member]').forEach((el,i) => bindCard(el, direction[i]));
-    }
-
-    function renderGrid(slot, list){
-      slot.innerHTML = list.map(m => `
-        <div class="team-card${m.nom === 'Poste à pourvoir' ? ' empty' : ''}" data-member>
-          ${avatarHTML(m,'sm')}
-          <h4>${m.nom === 'Poste à pourvoir' ? 'À pourvoir' : m.nom}</h4>
-          <div class="role">${m.poste}</div>
-        </div>`).join('');
-      slot.querySelectorAll('[data-member]').forEach((el,i) => bindCard(el, list[i]));
-    }
-    renderGrid(caSlot, ca);
-    renderGrid(controleSlot, controle);
+          <div class="team-grid reveal visible" style="grid-template-columns:repeat(auto-fit,minmax(220px,260px));justify-content:center"></div>
+        </div>`;
+      host.appendChild(sec);
+      renderGrid(sec.querySelector('.team-grid'), grp.list);
+    });
   }
 
   fetch(SHEET_CSV_URL)
     .then(r => { if(!r.ok) throw new Error('fetch failed'); return r.text(); })
-    .then(text => {
-      const members = csvToMembers(text);
-      renderTeam(members && members.length ? members : FALLBACK);
-    })
-    .catch(() => renderTeam(FALLBACK));
+    .then(text => renderTeam(buildTeam(csvToMembers(text))))
+    .catch(() => renderTeam(buildTeam([])));
 })();
 </script>
 
