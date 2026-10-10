@@ -323,7 +323,18 @@ footer{background:var(--navy-dark);color:var(--white);padding:70px 0 26px}
     const role = card.dataset.role;
     const desc = card.dataset.desc;
     const tags = (card.dataset.tags || '').split(',').filter(Boolean);
-    modalAvatar.textContent = name === 'Poste à pourvoir' ? '?' : initials(name);
+    const photo = card.dataset.photo || '';
+    const ini = name === 'Poste à pourvoir' ? '?' : initials(name);
+    modalAvatar.textContent = ini;
+    if(photo){
+      const img = document.createElement('img');
+      img.src = photo;
+      img.alt = name;
+      img.style.cssText = 'width:100%;height:100%;object-fit:cover;border-radius:50%';
+      img.onerror = () => { modalAvatar.textContent = ini; };
+      modalAvatar.textContent = '';
+      modalAvatar.appendChild(img);
+    }
     modalName.textContent = name;
     modalRole.textContent = role;
     modalDesc.textContent = desc;
@@ -505,6 +516,7 @@ footer{background:var(--navy-dark);color:var(--white);padding:70px 0 26px}
     el.dataset.name = member.nom;
     el.dataset.role = member.poste;
     el.dataset.desc = member.description || '';
+    el.dataset.photo = member.photo || '';
     el.addEventListener('click', () => openModal(el));
   }
 
