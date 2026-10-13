@@ -14,12 +14,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title id="page-title">Galerie — SNA-ONG | Sud-Nord Actions</title>
 <meta id="meta-desc" name="description" content="Découvrez en images les actions de terrain de Sud-Nord Actions ONG à Djougou : culture, santé, éducation, eau et développement communautaire.">
-<link id="canonical-link" rel="canonical" href="https://snaong.org/galerie.html">
+<link id="canonical-link" rel="canonical" href="https://www.snaong.org/galerie.html">
 <meta property="og:type" content="website">
 <meta id="og-title" property="og:title" content="Galerie — SNA-ONG">
 <meta id="og-desc" property="og:description" content="Les actions de Sud-Nord Actions ONG en images, Djougou, Bénin.">
-<meta id="og-image" property="og:image" content="https://snaong.org/hero.png">
-<meta id="og-url" property="og:url" content="https://snaong.org/galerie.html">
+<meta id="og-image" property="og:image" content="https://www.snaong.org/hero.png">
+<meta id="og-url" property="og:url" content="https://www.snaong.org/galerie.html">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -443,7 +443,7 @@ footer{background:var(--navy-dark);color:var(--white);padding:70px 0 26px}
   function updateSEO(actu, slug){
     const title = actu ? `Galerie — ${actu.titre} — SNA-ONG` : `Galerie — SNA-ONG`;
     const desc = actu ? `Photos de l'action : ${actu.titre}. Découvrez le travail de terrain de SNA-ONG.` : "Découvrez en images les actions de terrain de Sud-Nord Actions ONG.";
-    const url = `https://snaong.org/galerie.html?slug=${encodeURIComponent(slug)}`;
+    const url = `https://www.snaong.org/galerie.html?slug=${encodeURIComponent(slug)}`;
     document.getElementById('page-title').textContent = title;
     document.getElementById('meta-desc').setAttribute('content', desc);
     document.getElementById('canonical-link').setAttribute('href', url);
@@ -454,10 +454,10 @@ footer{background:var(--navy-dark);color:var(--white);padding:70px 0 26px}
   function resetSEO(){
     document.getElementById('page-title').textContent = 'Galerie — SNA-ONG | Sud-Nord Actions';
     document.getElementById('meta-desc').setAttribute('content', "Découvrez en images les actions de terrain de Sud-Nord Actions ONG à Djougou : culture, santé, éducation, eau et développement communautaire.");
-    document.getElementById('canonical-link').setAttribute('href', 'https://snaong.org/galerie.html');
+    document.getElementById('canonical-link').setAttribute('href', 'https://www.snaong.org/galerie.html');
     document.getElementById('og-title').setAttribute('content', 'Galerie — SNA-ONG');
     document.getElementById('og-desc').setAttribute('content', "Les actions de Sud-Nord Actions ONG en images, Djougou, Bénin.");
-    document.getElementById('og-url').setAttribute('content', 'https://snaong.org/galerie.html');
+    document.getElementById('og-url').setAttribute('content', 'https://www.snaong.org/galerie.html');
   }
 
   function showAlbum(slug){
@@ -480,7 +480,7 @@ footer{background:var(--navy-dark);color:var(--white);padding:70px 0 26px}
     });
 
     document.getElementById('btn-article').href = `actualites.html?slug=${encodeURIComponent(slug)}`;
-    const shareUrl = `https://snaong.org/galerie.html?slug=${encodeURIComponent(slug)}`;
+    const shareUrl = `https://www.snaong.org/galerie.html?slug=${encodeURIComponent(slug)}`;
     const shareTitle = actu ? actu.titre : slug;
     document.getElementById('btn-whatsapp').href = `https://wa.me/?text=${encodeURIComponent(shareTitle + ' — ' + shareUrl)}`;
     document.getElementById('btn-facebook').href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;

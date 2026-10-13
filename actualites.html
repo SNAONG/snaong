@@ -14,12 +14,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title id="page-title">Actualités — SNA-ONG | Sud-Nord Actions</title>
 <meta id="meta-desc" name="description" content="Suivez les actualités et projets de terrain de Sud-Nord Actions ONG à Djougou : culture, santé, éducation, droits humains et eau.">
-<link id="canonical-link" rel="canonical" href="https://snaong.org/actualites.html">
+<link id="canonical-link" rel="canonical" href="https://www.snaong.org/actualites.html">
 <meta property="og:type" content="article">
 <meta id="og-title" property="og:title" content="Actualités — SNA-ONG">
 <meta id="og-desc" property="og:description" content="Suivez les projets de terrain de Sud-Nord Actions ONG à Djougou, Bénin.">
-<meta id="og-image" property="og:image" content="https://snaong.org/hero.png">
-<meta id="og-url" property="og:url" content="https://snaong.org/actualites.html">
+<meta id="og-image" property="og:image" content="https://www.snaong.org/hero.png">
+<meta id="og-url" property="og:url" content="https://www.snaong.org/actualites.html">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -384,23 +384,23 @@ footer{background:var(--navy-dark);color:var(--white);padding:70px 0 26px}
   function updateSEO(actu){
     const title = `${actu.titre} — SNA-ONG`;
     const desc = resume(actu.contenu, 155);
-    const url = `https://snaong.org/actualites.html?slug=${encodeURIComponent(actu.slug)}`;
+    const url = `https://www.snaong.org/actualites.html?slug=${encodeURIComponent(actu.slug)}`;
     document.getElementById('page-title').textContent = title;
     document.getElementById('meta-desc').setAttribute('content', desc);
     document.getElementById('canonical-link').setAttribute('href', url);
     document.getElementById('og-title').setAttribute('content', title);
     document.getElementById('og-desc').setAttribute('content', desc);
-    document.getElementById('og-image').setAttribute('content', actu.image ? (actu.image.startsWith('http') ? actu.image : `https://snaong.org/${actu.image}`) : 'https://snaong.org/hero.png');
+    document.getElementById('og-image').setAttribute('content', actu.image ? (actu.image.startsWith('http') ? actu.image : `https://www.snaong.org/${actu.image}`) : 'https://www.snaong.org/hero.png');
     document.getElementById('og-url').setAttribute('content', url);
   }
   function resetSEO(){
     document.getElementById('page-title').textContent = 'Actualités — SNA-ONG | Sud-Nord Actions';
     document.getElementById('meta-desc').setAttribute('content', "Suivez les actualités et projets de terrain de Sud-Nord Actions ONG à Djougou : culture, santé, éducation, droits humains et eau.");
-    document.getElementById('canonical-link').setAttribute('href', 'https://snaong.org/actualites.html');
+    document.getElementById('canonical-link').setAttribute('href', 'https://www.snaong.org/actualites.html');
     document.getElementById('og-title').setAttribute('content', 'Actualités — SNA-ONG');
     document.getElementById('og-desc').setAttribute('content', "Suivez les projets de terrain de Sud-Nord Actions ONG à Djougou, Bénin.");
-    document.getElementById('og-image').setAttribute('content', 'https://snaong.org/hero.png');
-    document.getElementById('og-url').setAttribute('content', 'https://snaong.org/actualites.html');
+    document.getElementById('og-image').setAttribute('content', 'https://www.snaong.org/hero.png');
+    document.getElementById('og-url').setAttribute('content', 'https://www.snaong.org/actualites.html');
   }
 
   function showDetail(slug){
@@ -415,7 +415,7 @@ footer{background:var(--navy-dark);color:var(--white);padding:70px 0 26px}
     document.getElementById('detail-content').textContent = actu.contenu;
     document.getElementById('btn-gallery').href = `galerie.html?slug=${encodeURIComponent(actu.slug)}`;
 
-    const shareUrl = `https://snaong.org/actualites.html?slug=${encodeURIComponent(actu.slug)}`;
+    const shareUrl = `https://www.snaong.org/actualites.html?slug=${encodeURIComponent(actu.slug)}`;
     document.getElementById('btn-whatsapp').href = `https://wa.me/?text=${encodeURIComponent(actu.titre + ' — ' + shareUrl)}`;
     document.getElementById('btn-facebook').href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
 
