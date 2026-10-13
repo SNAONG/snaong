@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://snaong.org/sitemap.xml
+Sitemap: https://www.snaong.org/sitemap.xml
