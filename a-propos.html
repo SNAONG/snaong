@@ -133,11 +133,27 @@ section{padding:90px 0}
 .domaine-content p{font-size:14.5px;color:var(--text);max-width:640px}
 
 /* Zone intervention */
-.zone-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.zone-card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:26px 20px;text-align:center;transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
-.zone-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-sm)}
-.zone-card .zone-icon{width:36px;height:36px;margin:0 auto 14px;color:var(--green)}
-.zone-card h4{font-family:var(--disp);font-weight:600;font-size:16px;color:var(--navy)}
+.zone-lead{max-width:660px;margin:14px auto 0;color:var(--text);font-size:15.5px;text-align:center}
+.dep-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px}
+.dep-card{position:relative;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:24px 16px 22px;text-align:center;overflow:hidden;transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s var(--ease)}
+.dep-card::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:var(--green);transform:scaleX(0);transform-origin:left;transition:transform .45s var(--ease)}
+.dep-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-sm);border-color:rgba(46,125,79,.35)}
+.dep-card:hover::before{transform:scaleX(1)}
+.dep-num{display:block;font-family:var(--disp);font-size:13px;font-weight:600;letter-spacing:.12em;color:var(--gold);margin-bottom:12px}
+.dep-icon{width:42px;height:42px;border-radius:50%;background:rgba(46,125,79,.1);color:var(--green);display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
+.dep-icon svg{width:20px;height:20px}
+.dep-card h4{font-family:var(--disp);font-weight:600;font-size:17px;color:var(--navy)}
+.dep-card.is-hq{background:linear-gradient(160deg,var(--green) 0%,var(--green-dark) 100%);border-color:transparent;box-shadow:var(--shadow-md)}
+.dep-card.is-hq::before{background:var(--gold);transform:scaleX(1)}
+.dep-card.is-hq .dep-num{color:#F0D9B0}
+.dep-card.is-hq .dep-icon{background:rgba(255,255,255,.18);color:var(--white)}
+.dep-card.is-hq h4{color:var(--white)}
+.dep-badge{display:inline-block;margin-top:10px;font-size:10.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:rgba(255,255,255,.18);color:var(--white);border-radius:999px;padding:4px 11px}
+.zone-note{max-width:680px;margin:30px auto 0;text-align:center;font-size:14px;color:var(--muted)}
+.zone-note strong{color:var(--navy);font-weight:600}
+@keyframes depIn{from{opacity:0;transform:translateY(18px) scale(.97)}}
+.dep-grid.visible .dep-card{animation:depIn .6s var(--ease) backwards;animation-delay:calc(var(--i)*55ms)}
+@media(prefers-reduced-motion:reduce){.dep-grid.visible .dep-card{animation:none}}
 
 /* CTA */
 .cta-don{background:linear-gradient(135deg,var(--green) 0%,var(--green-dark) 100%);color:var(--white);position:relative;overflow:hidden}
@@ -174,7 +190,7 @@ footer{background:var(--navy-dark);color:var(--white);padding:70px 0 26px}
   .histoire-grid{grid-template-columns:1fr;gap:44px}
   .histoire-media{order:-1;max-width:420px;margin:0 auto}
   .vmd-grid{grid-template-columns:1fr}
-  .zone-grid{grid-template-columns:repeat(2,1fr)}
+  .dep-grid{grid-template-columns:repeat(3,1fr)}
   .footer-grid{grid-template-columns:1fr 1fr;gap:32px}
   .cta-box{flex-direction:column;text-align:center}
   .domaine-row{grid-template-columns:56px 1fr;gap:20px}
@@ -185,7 +201,9 @@ footer{background:var(--navy-dark);color:var(--white);padding:70px 0 26px}
   .menu-btn{display:block}
   .nav-cta{margin-left:0;text-align:center}
   section{padding:64px 0}
-  .zone-grid{grid-template-columns:1fr}
+  .dep-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+  .dep-card{padding:20px 12px 18px}
+  .dep-card h4{font-size:15.5px}
   .footer-grid{grid-template-columns:1fr;gap:28px}
   .histoire-meta{gap:16px}
 }
@@ -293,7 +311,7 @@ footer{background:var(--navy-dark);color:var(--white);padding:70px 0 26px}
       </div>
       <div class="domaine-row">
         <div class="domaine-icon-lg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
-        <div class="domaine-content"><h3>Promotion des droits humains et protection de l'enfant</h3><p>Sensibilisation et actions concrètes pour la défense des droits fondamentaux et la protection des enfants dans les communes d'intervention.</p></div>
+        <div class="domaine-content"><h3>Promotion des droits humains et protection de l'enfant</h3><p>Sensibilisation et actions concrètes pour la défense des droits fondamentaux et la protection des enfants dans ses zones d'intervention.</p></div>
       </div>
       <div class="domaine-row">
         <div class="domaine-icon-lg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C12 2 5 10 5 15a7 7 0 0014 0c0-5-7-13-7-13z"/></svg></div>
@@ -307,14 +325,24 @@ footer{background:var(--navy-dark);color:var(--white);padding:70px 0 26px}
   <div class="container">
     <div class="section-head reveal">
       <span class="eyebrow">Zone d'intervention</span>
-      <h2>Présents dans la Donga</h2>
+      <h2>Présents dans les 12 départements du Bénin</h2>
+      <p class="zone-lead">Depuis son siège à Djougou, dans la Donga, SNA-ONG accompagne les communautés à la base à travers tout le pays.</p>
     </div>
-    <div class="zone-grid reveal">
-      <div class="zone-card"><svg class="zone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6-7-11a7 7 0 0114 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="3"/></svg><h4>Djougou</h4></div>
-      <div class="zone-card"><svg class="zone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6-7-11a7 7 0 0114 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="3"/></svg><h4>Copargo</h4></div>
-      <div class="zone-card"><svg class="zone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6-7-11a7 7 0 0114 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="3"/></svg><h4>Ouaké</h4></div>
-      <div class="zone-card"><svg class="zone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6-7-11a7 7 0 0114 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="3"/></svg><h4>Bassila</h4></div>
+    <div class="dep-grid reveal">
+      <div class="dep-card" style="--i:0"><span class="dep-num">01</span><div class="dep-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6-7-11a7 7 0 0114 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="3"/></svg></div><h4>Alibori</h4></div>
+      <div class="dep-card" style="--i:1"><span class="dep-num">02</span><div class="dep-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6-7-11a7 7 0 0114 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="3"/></svg></div><h4>Atacora</h4></div>
+      <div class="dep-card" style="--i:2"><span class="dep-num">03</span><div class="dep-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6-7-11a7 7 0 0114 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="3"/></svg></div><h4>Atlantique</h4></div>
+      <div class="dep-card" style="--i:3"><span class="dep-num">04</span><div class="dep-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6-7-11a7 7 0 0114 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="3"/></svg></div><h4>Borgou</h4></div>
+      <div class="dep-card" style="--i:4"><span class="dep-num">05</span><div class="dep-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6-7-11a7 7 0 0114 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="3"/></svg></div><h4>Collines</h4></div>
+      <div class="dep-card" style="--i:5"><span class="dep-num">06</span><div class="dep-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6-7-11a7 7 0 0114 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="3"/></svg></div><h4>Couffo</h4></div>
+      <div class="dep-card is-hq" style="--i:6"><span class="dep-num">07</span><div class="dep-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6-7-11a7 7 0 0114 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="3"/></svg></div><h4>Donga</h4><span class="dep-badge">Siège · Djougou</span></div>
+      <div class="dep-card" style="--i:7"><span class="dep-num">08</span><div class="dep-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6-7-11a7 7 0 0114 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="3"/></svg></div><h4>Littoral</h4></div>
+      <div class="dep-card" style="--i:8"><span class="dep-num">09</span><div class="dep-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6-7-11a7 7 0 0114 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="3"/></svg></div><h4>Mono</h4></div>
+      <div class="dep-card" style="--i:9"><span class="dep-num">10</span><div class="dep-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6-7-11a7 7 0 0114 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="3"/></svg></div><h4>Ouémé</h4></div>
+      <div class="dep-card" style="--i:10"><span class="dep-num">11</span><div class="dep-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6-7-11a7 7 0 0114 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="3"/></svg></div><h4>Plateau</h4></div>
+      <div class="dep-card" style="--i:11"><span class="dep-num">12</span><div class="dep-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6-7-11a7 7 0 0114 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="3"/></svg></div><h4>Zou</h4></div>
     </div>
+    <p class="zone-note reveal"><strong>Exemple de terrain :</strong> programme RePaSOC/UE dans la Donga, à Djougou, Copargo, Ouaké et Bassila (2019 — 2020).</p>
   </div>
 </section>
 
@@ -322,7 +350,7 @@ footer{background:var(--navy-dark);color:var(--white);padding:70px 0 26px}
   <div class="container cta-box">
     <div>
       <h2>Envie de soutenir nos actions ?</h2>
-      <p>Chaque don contribue directement aux projets de SNA-ONG à Djougou et dans la Donga.</p>
+      <p>Chaque don contribue directement aux projets de SNA-ONG à Djougou et dans tout le Bénin.</p>
     </div>
     <a href="don.html" class="btn btn-primary">Faire un don</a>
   </div>
