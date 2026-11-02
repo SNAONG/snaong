@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ENFJS8D2FH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-ENFJS8D2FH');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="page-title">Documents - SNA-ONG | Sud-Nord Actions</title>
+<meta id="meta-desc" name="description" content="Consultez les documents administratifs, les rapports et les politiques de Sud-Nord Actions ONG à Djougou, Bénin.">
+<link id="canonical-link" rel="canonical" href="https://www.snaong.org/documents.html">
+<meta property="og:type" content="website">
+<meta id="og-title" property="og:title" content="Documents - SNA-ONG">
+<meta id="og-desc" property="og:description" content="Documents administratifs, rapports et politiques de Sud-Nord Actions ONG, Djougou, Bénin.">
+<meta id="og-image" property="og:image" content="https://www.snaong.org/hero.png">
+<meta id="og-url" property="og:url" content="https://www.snaong.org/documents.html">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1B3A5C; --navy-dark:#0F2340; --green:#2E7D4F; --green-dark:#1F5C38;
+  --gold:#C9974C; --ink:#1C1F26; --text:#4B5563; --muted:#7A8590;
+  --white:#FFFFFF; --surface:#F5F7F9; --line:rgba(27,58,92,.1);
+  --shadow-sm:0 6px 18px rgba(15,35,64,.08); --shadow-md:0 16px 40px rgba(15,35,64,.12);
+  --radius:14px; --disp:'Playfair Display',serif; --body:'Inter',sans-serif;
+  --ease:cubic-bezier(.22,.8,.25,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{font-family:var(--body);color:var(--ink);background:var(--white);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+button{font:inherit;cursor:pointer}
+::selection{background:var(--green);color:var(--white)}
+.container{width:min(1200px,calc(100% - 48px));margin-inline:auto}
+.container.narrow{max-width:760px}
+
+header{position:fixed;top:0;left:0;right:0;z-index:1000;height:82px;display:flex;align-items:center;transition:height .3s var(--ease);background:rgba(255,255,255,.96);backdrop-filter:blur(10px);box-shadow:0 1px 0 var(--line)}
+header.scrolled{height:70px}
+.header-inner{display:flex;align-items:center;justify-content:space-between;width:100%}
+.brand{display:flex;align-items:center;gap:12px}
+.brand img{height:42px;transition:height .3s ease}
+header.scrolled .brand img{height:36px}
+.brand-name{font-family:var(--disp);font-weight:700;font-size:17px;color:var(--navy)}
+nav{display:flex;align-items:center;gap:6px}
+.nav-link{padding:10px 16px;font-size:14px;font-weight:500;color:var(--ink);border-radius:8px;transition:background .2s ease,color .2s ease}
+.nav-link:hover,.nav-link.active{background:var(--surface);color:var(--green)}
+.nav-cta{margin-left:8px;background:var(--green);color:var(--white);padding:11px 22px;border-radius:8px;font-size:14px;font-weight:600;transition:background .2s ease,transform .2s ease}
+.nav-cta:hover{background:var(--green-dark);transform:translateY(-1px)}
+.menu-btn{display:none;background:none;border:none;cursor:pointer;padding:8px;z-index:1001;position:relative}
+.menu-btn span{display:block;width:22px;height:2px;background:var(--navy);margin:5px 0;border-radius:2px;transition:transform .3s var(--ease),opacity .2s ease}
+.menu-btn.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.menu-btn.open span:nth-child(2){opacity:0}
+.menu-btn.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.nav-overlay{display:none;position:fixed;inset:0;background:rgba(15,35,64,.4);z-index:998;opacity:0;transition:opacity .3s ease}
+.nav-overlay.open{display:block;opacity:1}
+
+.page-hero{position:relative;padding:150px 0 70px;background:linear-gradient(180deg,var(--surface) 0%,var(--white) 100%);overflow:hidden}
+.page-hero-diag{position:absolute;top:0;right:0;width:40%;height:100%;background:var(--navy);clip-path:polygon(45% 0,100% 0,100% 100%,20% 100%);z-index:0;opacity:.05}
+.page-hero-inner{position:relative;z-index:1;max-width:680px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--green);margin-bottom:16px}
+
+.page-hero h1{font-family:var(--disp);font-weight:700;font-size:clamp(30px,4.2vw,48px);line-height:1.15;color:var(--navy);margin-bottom:16px}
+.page-hero p{font-size:16px;color:var(--text)}
+
+section{padding:90px 0}
+
+/* Liste actus */
+#list-view.hidden, #detail-view.hidden{display:none}
+.actus-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.actu-card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;cursor:pointer;transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
+.actu-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-md)}
+.actu-media{aspect-ratio:16/10;overflow:hidden;background:var(--surface)}
+.actu-media img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
+.actu-card:hover .actu-media img{transform:scale(1.06)}
+.actu-body{padding:22px}
+.actu-date{font-size:11.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--green)}
+.actu-body h3{font-family:var(--disp);font-weight:600;font-size:18px;color:var(--navy);margin:10px 0 8px;line-height:1.35}
+.actu-body p{font-size:13.5px;color:var(--text)}
+.actu-readmore{margin-top:14px;font-size:13px;font-weight:600;color:var(--navy)}
+.empty-state{text-align:center;padding:60px 20px;color:var(--muted);font-size:15px}
+
+/* Vue détail */
+.detail-back{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;font-weight:600;color:var(--navy);margin-bottom:28px;cursor:pointer}
+.detail-date{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--green);margin-bottom:14px;display:block}
+.detail-title{font-family:var(--disp);font-weight:700;font-size:clamp(26px,4vw,38px);color:var(--navy);line-height:1.2;margin-bottom:26px}
+.detail-media{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-md);margin-bottom:32px}
+.detail-media img{width:100%;aspect-ratio:16/9;object-fit:cover}
+.detail-body{font-size:16px;color:var(--text);line-height:1.85;white-space:pre-line}
+
+/* Barre d'actions fin de lecture */
+.action-bar{margin-top:56px;padding-top:36px;border-top:1px solid var(--line)}
+.action-bar-title{font-size:12.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:18px;font-weight:600}
+.action-buttons{display:flex;gap:12px;flex-wrap:wrap}
+.action-btn{display:inline-flex;align-items:center;gap:9px;padding:13px 20px;border-radius:10px;font-size:13.5px;font-weight:600;border:1.5px solid var(--line);color:var(--navy);background:var(--white);transition:transform .2s var(--ease),box-shadow .2s ease,border-color .2s ease}
+.action-btn:hover{transform:translateY(-2px);box-shadow:var(--shadow-sm)}
+.action-btn svg{width:18px;height:18px}
+.action-btn.gallery{background:var(--navy);color:var(--white);border-color:var(--navy)}
+.action-btn.gallery:hover{background:var(--navy-dark)}
+.action-btn.whatsapp:hover{border-color:#25D366;color:#25D366}
+.action-btn.facebook:hover{border-color:#1877F2;color:#1877F2}
+.action-btn.copy.copied{background:var(--green);color:var(--white);border-color:var(--green)}
+.action-btn.support{background:var(--gold);color:var(--white);border-color:var(--gold)}
+.action-btn.support:hover{background:#B3823C}
+
+.cta-don{background:linear-gradient(135deg,var(--green) 0%,var(--green-dark) 100%);color:var(--white);position:relative;overflow:hidden}
+.cta-don::before{content:"";position:absolute;top:-40%;left:-10%;width:400px;height:400px;background:radial-gradient(circle,rgba(255,255,255,.12),transparent 70%)}
+.cta-box{display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;position:relative;z-index:1}
+.cta-box h2{font-family:var(--disp);font-weight:700;font-size:clamp(24px,3.4vw,34px);max-width:560px;line-height:1.25}
+.cta-box p{color:rgba(255,255,255,.8);margin-top:10px;max-width:480px;font-size:15px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:9px;font-size:14.5px;font-weight:600;transition:transform .2s var(--ease),background .2s ease}
+.btn-primary{background:var(--white);color:var(--green-dark)}
+.btn-primary:hover{background:var(--surface);transform:translateY(-2px)}
+
+footer{background:var(--navy-dark);color:var(--white);padding:70px 0 26px}
+.footer-grid{display:grid;grid-template-columns:1.3fr .8fr .8fr .9fr;gap:48px;padding-bottom:44px}
+.footer-brand{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.footer-brand img{height:38px}
+.footer-brand span{font-family:var(--disp);font-weight:700;font-size:16px}
+.footer-col p{font-size:13.5px;color:rgba(255,255,255,.6);max-width:280px;line-height:1.75}
+.footer-title{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--gold);margin-bottom:16px;font-weight:700}
+.footer-links{display:grid;gap:10px}
+.footer-links a{font-size:14px;color:rgba(255,255,255,.72)}
+.footer-links a:hover{color:var(--white)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);font-size:12.5px;color:rgba(255,255,255,.45)}
+.footer-bottom a{color:rgba(255,255,255,.45)}
+
+.back-top{position:fixed;right:24px;bottom:24px;z-index:500;width:46px;height:46px;display:grid;place-items:center;border-radius:50%;background:var(--green);color:var(--white);box-shadow:var(--shadow-md);opacity:0;visibility:hidden;transform:translateY(12px);transition:.3s var(--ease);border:none}
+.back-top.show{opacity:1;visibility:visible;transform:translateY(0)}
+
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--navy-dark);color:var(--white);padding:14px 24px;border-radius:10px;font-size:13.5px;font-weight:500;box-shadow:var(--shadow-md);opacity:0;visibility:hidden;transition:.3s var(--ease);z-index:3000}
+.toast.show{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:1000px){
+  .actus-grid{grid-template-columns:repeat(2,1fr)}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:32px}
+  .cta-box{flex-direction:column;text-align:center}
+}
+@media(max-width:680px){
+  nav{position:fixed;top:0;right:0;width:min(320px,86vw);height:100svh;background:var(--white);flex-direction:column;align-items:stretch;padding:100px 24px 30px;gap:4px;transform:translateX(105%);transition:transform .4s var(--ease);box-shadow:-16px 0 50px rgba(0,0,0,.12)}
+  nav.open{transform:translateX(0)}
+  .menu-btn{display:block}
+  .nav-cta{margin-left:0;text-align:center}
+  section{padding:64px 0}
+  .actus-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr;gap:28px}
+  .action-buttons{flex-direction:column}
+  .action-btn{justify-content:center}
+}
+/* Menu deroulant */
+.nav-drop{position:relative}
+.nav-drop-btn{display:flex;align-items:center;gap:7px;padding:10px 16px;font-family:inherit;font-size:14px;font-weight:500;color:var(--ink);background:none;border:none;border-radius:8px;cursor:pointer;transition:background .2s ease,color .2s ease}
+.nav-drop-btn svg{width:10px;height:10px;flex-shrink:0;transition:transform .25s ease}
+.nav-drop:hover .nav-drop-btn,.nav-drop.open .nav-drop-btn,.nav-drop.active .nav-drop-btn{background:var(--surface);color:var(--green)}
+.nav-drop.open .nav-drop-btn svg{transform:rotate(180deg)}
+.nav-sub{position:absolute;top:100%;left:0;min-width:200px;margin-top:6px;padding:8px;background:var(--white);border:1px solid var(--line);border-radius:12px;box-shadow:0 14px 40px rgba(15,35,64,.12);opacity:0;visibility:hidden;transform:translateY(6px);transition:opacity .2s ease,transform .2s ease,visibility .2s;z-index:1002}
+.nav-sub::before{content:"";position:absolute;left:0;right:0;top:-8px;height:8px}
+.nav-sub-link{display:block;padding:10px 14px;font-size:14px;font-weight:500;color:var(--ink);border-radius:8px;transition:background .2s ease,color .2s ease}
+.nav-sub-link:hover,.nav-sub-link.active{background:var(--surface);color:var(--green)}
+@media(min-width:681px){
+  .nav-drop:hover .nav-sub,.nav-drop:focus-within .nav-sub,.nav-drop.open .nav-sub{opacity:1;visibility:visible;transform:none}
+}
+@media(max-width:680px){
+  .nav-drop{display:block}
+  .nav-drop-btn{width:100%;justify-content:space-between;padding:12px 16px}
+  .nav-sub{position:static;min-width:0;margin:0;padding:0 0 0 12px;background:transparent;border:none;box-shadow:none;border-radius:0;opacity:1;visibility:visible;transform:none;max-height:0;overflow:hidden;transition:max-height .3s ease}
+  .nav-sub::before{display:none}
+  .nav-drop.open .nav-sub{max-height:300px}
+  .nav-drop.active .nav-sub{max-height:300px}
+}
+/* Documents */
+.doc-tabs{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:44px}
+.doc-tab{padding:10px 20px;border-radius:999px;border:1.5px solid var(--line);background:var(--white);color:var(--navy);font-size:13.5px;font-weight:600;transition:background .2s ease,color .2s ease,border-color .2s ease}
+.doc-tab:hover{border-color:var(--green);color:var(--green)}
+.doc-tab.active{background:var(--green);border-color:var(--green);color:var(--white)}
+.doc-block + .doc-block{margin-top:60px}
+.doc-block-title{display:flex;align-items:center;gap:12px;font-family:var(--disp);font-weight:700;font-size:clamp(22px,3vw,30px);color:var(--navy);margin-bottom:26px}
+.doc-count{display:inline-grid;place-items:center;min-width:30px;height:30px;padding:0 10px;border-radius:999px;background:var(--surface);color:var(--green);font-family:var(--body);font-size:13px;font-weight:700}
+.docs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.doc-card{display:flex;flex-direction:column;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:24px;transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
+.doc-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-md)}
+.doc-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+.doc-icon{width:46px;height:46px;display:grid;place-items:center;border-radius:12px;background:rgba(46,125,79,.1);color:var(--green)}
+.doc-icon svg{width:24px;height:24px}
+.doc-year{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--green)}
+.doc-card h3{font-family:var(--disp);font-weight:600;font-size:18px;color:var(--navy);line-height:1.35;margin-bottom:10px}
+.doc-card p{font-size:13.5px;color:var(--text);margin-bottom:22px}
+.doc-read{margin-top:auto;display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:12px 18px;border:none;border-radius:10px;background:var(--navy);color:var(--white);font-size:13.5px;font-weight:600;transition:background .2s ease,transform .2s var(--ease)}
+.doc-read:hover{background:var(--navy-dark);transform:translateY(-2px)}
+.doc-read svg{width:18px;height:18px}
+
+/* Lecteur */
+.reader{position:fixed;inset:0;z-index:2500;display:none;flex-direction:column;background:rgba(15,35,64,.94)}
+.reader.open{display:flex}
+.reader-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 22px;background:var(--navy-dark);color:var(--white)}
+.reader-title{font-size:14.5px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.reader-close{flex-shrink:0;padding:9px 18px;border:1.5px solid rgba(255,255,255,.3);border-radius:9px;background:transparent;color:var(--white);font-size:13.5px;font-weight:600;transition:background .2s ease}
+.reader-close:hover{background:rgba(255,255,255,.12)}
+.reader-body{position:relative;flex:1}
+.reader-frame{position:absolute;inset:0;width:100%;height:100%;border:0;background:#fff}
+.reader-shield{position:absolute;top:0;right:0;width:70px;height:62px;z-index:2}
+body.reader-open{overflow:hidden}
+@media(max-width:1000px){
+  .docs-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:680px){
+  .docs-grid{grid-template-columns:1fr}
+  .doc-block + .doc-block{margin-top:48px}
+  .reader-bar{padding:12px 16px}
+}
+</style>
+</head>
+<body>
+
+<header id="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="brand"><img src="logo.png" alt="SNA-ONG"><span class="brand-name">SNA-ONG</span></a>
+    <nav id="nav-menu">
+      <div class="nav-drop active">
+        <button type="button" class="nav-drop-btn" aria-expanded="false" aria-haspopup="true">L'association<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="nav-sub">
+          <a href="a-propos.html" class="nav-sub-link">À propos</a>
+          <a href="statuts.html" class="nav-sub-link">Statuts</a>
+          <a href="equipe.html" class="nav-sub-link">Équipe</a>
+          <a href="documents.html" class="nav-sub-link active">Documents</a>
+        </div>
+      </div>
+      <div class="nav-drop">
+        <button type="button" class="nav-drop-btn" aria-expanded="false" aria-haspopup="true">Nos actions<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="nav-sub">
+          <a href="projets.html" class="nav-sub-link">Projets</a>
+          <a href="actualites.html" class="nav-sub-link">Actualités</a>
+          <a href="galerie.html" class="nav-sub-link">Galerie</a>
+          <a href="volontariat.html" class="nav-sub-link">Volontariat</a>
+        </div>
+      </div>
+      <a href="contact.html" class="nav-link">Contact</a>
+      <a href="don.html" class="nav-cta">Faire un don</a>
+    </nav>
+    <button class="menu-btn" id="menu-btn" aria-label="Ouvrir le menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<div class="nav-overlay" id="nav-overlay"></div>
+
+<!-- LISTE DES DOCUMENTS -->
+<section class="page-hero">
+  <div class="page-hero-diag"></div>
+  <div class="container page-hero-inner reveal visible">
+    <span class="eyebrow">Transparence</span>
+    <h1>Documents</h1>
+    <p>Consultez les documents administratifs, les rapports et les politiques de SNA-ONG.</p>
+  </div>
+</section>
+<section>
+  <div class="container">
+    <div class="doc-tabs" id="doc-tabs"></div>
+    <div id="docs-root">
+      <div class="empty-state">Chargement des documents…</div>
+    </div>
+  </div>
+</section>
+
+<!-- LECTEUR PDF -->
+<div class="reader" id="reader" role="dialog" aria-modal="true" aria-label="Lecteur de document">
+  <div class="reader-bar">
+    <span class="reader-title" id="reader-title">-</span>
+    <button type="button" class="reader-close" id="reader-close">Fermer</button>
+  </div>
+  <div class="reader-body">
+    <iframe class="reader-frame" id="reader-frame" title="Document" src="about:blank" allow="fullscreen"></iframe>
+    <div class="reader-shield"></div>
+  </div>
+</div>
+
+<section class="cta-don">
+  <div class="container cta-box">
+    <div>
+      <h2>Votre soutien change une vie, une goutte d'eau, un chant à la fois</h2>
+      <p>Chaque don contribue directement aux actions de SNA-ONG à Djougou et dans tout le Bénin.</p>
+    </div>
+    <a href="don.html" class="btn btn-primary">Faire un don</a>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="footer-brand"><img src="logo.png" alt="SNA-ONG"><span>SNA-ONG</span></div>
+        <p>Sud-Nord Actions ONG - culture, santé, éducation, droits humains et eau à Djougou, Bénin, depuis 1997.</p>
+      </div>
+      <div class="footer-col"><h4 class="footer-title">Navigation</h4><ul class="footer-links"><li><a href="a-propos.html">À propos</a></li><li><a href="statuts.html">Statuts</a></li><li><a href="equipe.html">Équipe</a></li><li><a href="documents.html">Documents</a></li><li><a href="projets.html">Projets</a></li></ul></div>
+      <div class="footer-col"><h4 class="footer-title">Explorer</h4><ul class="footer-links"><li><a href="actualites.html">Actualités</a></li><li><a href="galerie.html">Galerie</a></li><li><a href="volontariat.html">Volontariat</a></li><li><a href="don.html">Faire un don</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="footer-col"><h4 class="footer-title">Contact</h4><ul class="footer-links"><li><a href="mailto:snaong2000@yahoo.fr">snaong2000@yahoo.fr</a></li><li><a href="tel:+22997643716">(+229) 97 64 37 16</a></li><li>Quartier Gah, BP 193, Djougou</li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> SNA-ONG - Sud-Nord Actions. Tous droits réservés.</span>
+      <a href="https://wa.me/2290191175358" target="_blank" rel="noopener">Site conçu par DineTech</a>
+    </div>
+  </div>
+</footer>
+
+<button class="back-top" id="backTop" aria-label="Retour en haut">↑</button>
+<div class="toast" id="toast">Lien copié dans le presse-papier</div>
+
+<script>
+(() => {
+  "use strict";
+  const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSMFnO43ctZMNrTQN2GWTwCxbKGE7yTtAN-Ryv35dBLV174GkOj64TeOHNJTDmpf1mHqwUdo9acz4oj/pub?gid=38491610&single=true&output=csv";
+  const PDF_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></svg>';
+  const EYE_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>';
+
+  function parseCSV(text){
+    const rows = [];
+    let row = [], field = '', inQuotes = false;
+    for(let i=0;i<text.length;i++){
+      const c = text[i], next = text[i+1];
+      if(inQuotes){
+        if(c === '"' && next === '"'){ field += '"'; i++; }
+        else if(c === '"'){ inQuotes = false; }
+        else field += c;
+      } else {
+        if(c === '"') inQuotes = true;
+        else if(c === ','){ row.push(field); field=''; }
+        else if(c === '\n'){ row.push(field); rows.push(row); row=[]; field=''; }
+        else if(c === '\r'){ }
+        else field += c;
+      }
+    }
+    if(field.length || row.length){ row.push(field); rows.push(row); }
+    return rows.filter(r => r.some(v => v.trim() !== ''));
+  }
+
+  function esc(s){
+    return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+
+  function resume(text, len){
+    if(!text) return '';
+    return text.length > len ? text.slice(0,len).trim() + '…' : text;
+  }
+
+  /* Categories : "Administratifs", "Rapports", "Politiques" (accents et majuscules sans importance) */
+  function plain(s){
+    return (s || '').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
+  }
+  function catKey(raw){
+    const p = plain(raw);
+    if(p.startsWith('admin')) return 'administratifs';
+    if(p.startsWith('rapport')) return 'rapports';
+    if(p.startsWith('politique')) return 'politiques';
+    return p || 'autres';
+  }
+  const CAT_LABEL = {administratifs:'Documents administratifs', rapports:'Rapports', politiques:'Politiques'};
+  const CAT_TAB = {administratifs:'Administratifs', rapports:'Rapports', politiques:'Politiques'};
+  const CAT_ORDER = ['administratifs','rapports','politiques'];
+
+  function csvToDocs(text){
+    const rows = parseCSV(text);
+    if(rows.length < 2) return null;
+    const headers = rows[0].map(h => h.trim().toLowerCase());
+    const col = name => headers.indexOf(name);
+    const idx = {titre:col('titre'), categorie:col('categorie'), annee:col('annee'), description:col('description'), lien:col('lien')};
+    if(idx.titre === -1 || idx.lien === -1) return null;
+    const get = (r, i) => i === -1 ? '' : (r[i] || '').trim();
+    return rows.slice(1).map(r => {
+      const categorie = get(r, idx.categorie);
+      return {
+        titre:get(r, idx.titre),
+        categorie:categorie,
+        cat:catKey(categorie),
+        catRaw:categorie,
+        annee:get(r, idx.annee),
+        description:get(r, idx.description),
+        lien:get(r, idx.lien)
+      };
+    }).filter(d => d.titre && /^https?:\/\//i.test(d.lien));
+  }
+
+  function yearValue(a){
+    const y = (a || '').match(/\d{4}/g);
+    return y && y.length ? Math.max(...y.map(Number)) : 0;
+  }
+
+  /* Lien Drive normal -> lien de lecture seule (apercu, sans barre de telechargement) */
+  function toPreview(url){
+    if(/^https?:\/\/(drive|docs)\.google\.com\//i.test(url)){
+      const m = url.match(/\/file\/d\/([\w-]+)/) || url.match(/[?&]id=([\w-]+)/);
+      if(m) return `https://drive.google.com/file/d/${m[1]}/preview`;
+    }
+    return url;
+  }
+
+  let DOCS = [];
+  let current = 'all';
+
+  function groups(){
+    const map = new Map();
+    DOCS.forEach(d => {
+      if(!map.has(d.cat)) map.set(d.cat, {key:d.cat, label:CAT_LABEL[d.cat] || d.catRaw || 'Autres documents', tab:CAT_TAB[d.cat] || d.catRaw || 'Autres', items:[]});
+      map.get(d.cat).items.push(d);
+    });
+    const list = [...map.values()];
+    list.forEach(g => g.items.sort((a, b) => yearValue(b.annee) - yearValue(a.annee)));
+    list.sort((a, b) => {
+      const ia = CAT_ORDER.indexOf(a.key), ib = CAT_ORDER.indexOf(b.key);
+      return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib);
+    });
+    return list;
+  }
+
+  function card(d){
+    return `
+      <div class="doc-card">
+        <div class="doc-top">
+          <span class="doc-icon">${PDF_SVG}</span>
+          ${d.annee ? `<span class="doc-year">${esc(d.annee)}</span>` : ''}
+        </div>
+        <h3>${esc(d.titre)}</h3>
+        ${d.description ? `<p>${esc(resume(d.description, 140))}</p>` : '<p></p>'}
+        <button type="button" class="doc-read" data-i="${DOCS.indexOf(d)}">${EYE_SVG}Lire le document</button>
+      </div>`;
+  }
+
+  function render(){
+    const root = document.getElementById('docs-root');
+    const tabs = document.getElementById('doc-tabs');
+    const gs = groups();
+    if(!gs.length){
+      tabs.innerHTML = '';
+      root.innerHTML = '<div class="empty-state">Les documents seront bientôt disponibles. Revenez nous voir !</div>';
+      return;
+    }
+    if(current !== 'all' && !gs.some(g => g.key === current)) current = 'all';
+    tabs.innerHTML = [`<button type="button" class="doc-tab ${current === 'all' ? 'active' : ''}" data-cat="all">Tous</button>`]
+      .concat(gs.map(g => `<button type="button" class="doc-tab ${current === g.key ? 'active' : ''}" data-cat="${esc(g.key)}">${esc(g.tab)}</button>`)).join('');
+    tabs.querySelectorAll('.doc-tab').forEach(b => b.addEventListener('click', () => { current = b.dataset.cat; render(); }));
+
+    const shown = current === 'all' ? gs : gs.filter(g => g.key === current);
+    root.innerHTML = shown.map(g => `
+      <div class="doc-block">
+        <h2 class="doc-block-title">${esc(g.label)}<span class="doc-count">${g.items.length}</span></h2>
+        <div class="docs-grid">${g.items.map(card).join('')}</div>
+      </div>`).join('');
+    root.querySelectorAll('.doc-read').forEach(b => b.addEventListener('click', () => openReader(DOCS[+b.dataset.i])));
+  }
+
+  /* Lecteur */
+  const reader = document.getElementById('reader');
+  const frame = document.getElementById('reader-frame');
+  function openReader(d){
+    if(!d) return;
+    document.getElementById('reader-title').textContent = d.titre + (d.annee ? ' (' + d.annee + ')' : '');
+    frame.src = toPreview(d.lien);
+    reader.classList.add('open');
+    document.body.classList.add('reader-open');
+  }
+  function closeReader(){
+    reader.classList.remove('open');
+    document.body.classList.remove('reader-open');
+    frame.src = 'about:blank';
+  }
+  document.getElementById('reader-close').addEventListener('click', closeReader);
+  document.addEventListener('keydown', (e) => { if(e.key === 'Escape' && reader.classList.contains('open')) closeReader(); });
+
+  fetch(SHEET_CSV_URL)
+    .then(r => { if(!r.ok) throw new Error('fetch failed'); return r.text(); })
+    .then(text => { DOCS = csvToDocs(text) || []; render(); })
+    .catch(() => {
+      document.getElementById('doc-tabs').innerHTML = '';
+      document.getElementById('docs-root').innerHTML = '<div class="empty-state">Impossible de charger les documents pour le moment. Réessayez dans quelques instants.</div>';
+    });
+
+  /* Header / menu / back-top communs */
+  const header = document.getElementById('site-header');
+  const backTop = document.getElementById('backTop');
+  function onScroll(){
+    const y = window.scrollY;
+    header.classList.toggle('scrolled', y > 30);
+    backTop.classList.toggle('show', y > 500);
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  const menuBtn = document.getElementById('menu-btn');
+  const navMenu = document.getElementById('nav-menu');
+  const navOverlay = document.getElementById('nav-overlay');
+  function closeMenu(){
+    navMenu.classList.remove('open'); menuBtn.classList.remove('open'); navOverlay.classList.remove('open');
+    menuBtn.setAttribute('aria-expanded','false'); menuBtn.setAttribute('aria-label','Ouvrir le menu');
+  }
+  function toggleMenu(){
+    const opened = navMenu.classList.toggle('open');
+    menuBtn.classList.toggle('open', opened); navOverlay.classList.toggle('open', opened);
+    menuBtn.setAttribute('aria-expanded', opened); menuBtn.setAttribute('aria-label', opened ? 'Fermer le menu' : 'Ouvrir le menu');
+  }
+  menuBtn.addEventListener('click', toggleMenu);
+  navOverlay.addEventListener('click', closeMenu);
+  navMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeMenu(); });
+  backTop.addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, {threshold:.12, rootMargin:'0px 0px -40px 0px'});
+  revealEls.forEach(el => io.observe(el));
+})();
+</script>
+
+<script>
+(function(){
+  var drops = document.querySelectorAll('.nav-drop');
+  function closeAll(except){
+    drops.forEach(function(d){
+      if(d !== except){
+        d.classList.remove('open');
+        d.querySelector('.nav-drop-btn').setAttribute('aria-expanded','false');
+      }
+    });
+  }
+  drops.forEach(function(d){
+    var btn = d.querySelector('.nav-drop-btn');
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var willOpen = !d.classList.contains('open');
+      closeAll(d);
+      d.classList.toggle('open', willOpen);
+      btn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+    });
+  });
+  document.addEventListener('click', function(){ closeAll(null); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeAll(null); });
+})();
+</script>
+</body>
+</html>
