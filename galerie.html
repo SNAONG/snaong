@@ -12,11 +12,11 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title id="page-title">Galerie — SNA-ONG | Sud-Nord Actions</title>
+<title id="page-title">Galerie - SNA-ONG | Sud-Nord Actions</title>
 <meta id="meta-desc" name="description" content="Découvrez en images les actions de terrain de Sud-Nord Actions ONG à Djougou : culture, santé, éducation, eau et développement communautaire.">
 <link id="canonical-link" rel="canonical" href="https://www.snaong.org/galerie.html">
 <meta property="og:type" content="website">
-<meta id="og-title" property="og:title" content="Galerie — SNA-ONG">
+<meta id="og-title" property="og:title" content="Galerie - SNA-ONG">
 <meta id="og-desc" property="og:description" content="Les actions de Sud-Nord Actions ONG en images, Djougou, Bénin.">
 <meta id="og-image" property="og:image" content="https://www.snaong.org/hero.png">
 <meta id="og-url" property="og:url" content="https://www.snaong.org/galerie.html">
@@ -176,6 +176,27 @@ footer{background:var(--navy-dark);color:var(--white);padding:70px 0 26px}
   .lightbox-prev{left:8px}
   .lightbox-next{right:8px}
 }
+/* Menu deroulant */
+.nav-drop{position:relative}
+.nav-drop-btn{display:flex;align-items:center;gap:7px;padding:10px 16px;font-family:inherit;font-size:14px;font-weight:500;color:var(--ink);background:none;border:none;border-radius:8px;cursor:pointer;transition:background .2s ease,color .2s ease}
+.nav-drop-btn svg{width:10px;height:10px;flex-shrink:0;transition:transform .25s ease}
+.nav-drop:hover .nav-drop-btn,.nav-drop.open .nav-drop-btn,.nav-drop.active .nav-drop-btn{background:var(--surface);color:var(--green)}
+.nav-drop.open .nav-drop-btn svg{transform:rotate(180deg)}
+.nav-sub{position:absolute;top:100%;left:0;min-width:200px;margin-top:6px;padding:8px;background:var(--white);border:1px solid var(--line);border-radius:12px;box-shadow:0 14px 40px rgba(15,35,64,.12);opacity:0;visibility:hidden;transform:translateY(6px);transition:opacity .2s ease,transform .2s ease,visibility .2s;z-index:1002}
+.nav-sub::before{content:"";position:absolute;left:0;right:0;top:-8px;height:8px}
+.nav-sub-link{display:block;padding:10px 14px;font-size:14px;font-weight:500;color:var(--ink);border-radius:8px;transition:background .2s ease,color .2s ease}
+.nav-sub-link:hover,.nav-sub-link.active{background:var(--surface);color:var(--green)}
+@media(min-width:681px){
+  .nav-drop:hover .nav-sub,.nav-drop:focus-within .nav-sub,.nav-drop.open .nav-sub{opacity:1;visibility:visible;transform:none}
+}
+@media(max-width:680px){
+  .nav-drop{display:block}
+  .nav-drop-btn{width:100%;justify-content:space-between;padding:12px 16px}
+  .nav-sub{position:static;min-width:0;margin:0;padding:0 0 0 12px;background:transparent;border:none;box-shadow:none;border-radius:0;opacity:1;visibility:visible;transform:none;max-height:0;overflow:hidden;transition:max-height .3s ease}
+  .nav-sub::before{display:none}
+  .nav-drop.open .nav-sub{max-height:300px}
+  .nav-drop.active .nav-sub{max-height:300px}
+}
 </style>
 </head>
 <body>
@@ -184,11 +205,24 @@ footer{background:var(--navy-dark);color:var(--white);padding:70px 0 26px}
   <div class="container header-inner">
     <a href="index.html" class="brand"><img src="logo.png" alt="SNA-ONG"><span class="brand-name">SNA-ONG</span></a>
     <nav id="nav-menu">
-      <a href="a-propos.html" class="nav-link">À propos</a>
-      <a href="statuts.html" class="nav-link">Statuts</a>
-      <a href="equipe.html" class="nav-link">Équipe</a>
-      <a href="actualites.html" class="nav-link">Actualités</a>
-      <a href="galerie.html" class="nav-link active">Galerie</a>
+      <div class="nav-drop">
+        <button type="button" class="nav-drop-btn" aria-expanded="false" aria-haspopup="true">L'association<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="nav-sub">
+          <a href="a-propos.html" class="nav-sub-link">À propos</a>
+          <a href="statuts.html" class="nav-sub-link">Statuts</a>
+          <a href="equipe.html" class="nav-sub-link">Équipe</a>
+          <a href="documents.html" class="nav-sub-link">Documents</a>
+        </div>
+      </div>
+      <div class="nav-drop active">
+        <button type="button" class="nav-drop-btn" aria-expanded="false" aria-haspopup="true">Nos actions<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="nav-sub">
+          <a href="projets.html" class="nav-sub-link">Projets</a>
+          <a href="actualites.html" class="nav-sub-link">Actualités</a>
+          <a href="galerie.html" class="nav-sub-link active">Galerie</a>
+          <a href="volontariat.html" class="nav-sub-link">Volontariat</a>
+        </div>
+      </div>
       <a href="contact.html" class="nav-link">Contact</a>
       <a href="don.html" class="nav-cta">Faire un don</a>
     </nav>
@@ -223,7 +257,7 @@ footer{background:var(--navy-dark);color:var(--white);padding:70px 0 26px}
     <div class="container narrow reveal visible" style="position:relative;z-index:1">
       <span class="album-back" id="album-back">← Toute la galerie</span>
       <span class="album-date" id="album-date" style="display:block;margin-bottom:10px"></span>
-      <h1 class="album-title" id="album-title">—</h1>
+      <h1 class="album-title" id="album-title">-</h1>
       <p class="album-sub" id="album-sub"></p>
     </div>
   </section>
@@ -275,14 +309,14 @@ footer{background:var(--navy-dark);color:var(--white);padding:70px 0 26px}
     <div class="footer-grid">
       <div class="footer-col">
         <div class="footer-brand"><img src="logo.png" alt="SNA-ONG"><span>SNA-ONG</span></div>
-        <p>Sud-Nord Actions ONG — culture, santé, éducation, droits humains et eau à Djougou, Bénin, depuis 1997.</p>
+        <p>Sud-Nord Actions ONG - culture, santé, éducation, droits humains et eau à Djougou, Bénin, depuis 1997.</p>
       </div>
-      <div class="footer-col"><h4 class="footer-title">Navigation</h4><ul class="footer-links"><li><a href="a-propos.html">À propos</a></li><li><a href="statuts.html">Statuts</a></li><li><a href="equipe.html">Équipe</a></li><li><a href="actualites.html">Actualités</a></li></ul></div>
-      <div class="footer-col"><h4 class="footer-title">Explorer</h4><ul class="footer-links"><li><a href="galerie.html">Galerie</a></li><li><a href="don.html">Faire un don</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="footer-col"><h4 class="footer-title">Navigation</h4><ul class="footer-links"><li><a href="a-propos.html">À propos</a></li><li><a href="statuts.html">Statuts</a></li><li><a href="equipe.html">Équipe</a></li><li><a href="documents.html">Documents</a></li><li><a href="projets.html">Projets</a></li></ul></div>
+      <div class="footer-col"><h4 class="footer-title">Explorer</h4><ul class="footer-links"><li><a href="actualites.html">Actualités</a></li><li><a href="galerie.html">Galerie</a></li><li><a href="volontariat.html">Volontariat</a></li><li><a href="don.html">Faire un don</a></li><li><a href="contact.html">Contact</a></li></ul></div>
       <div class="footer-col"><h4 class="footer-title">Contact</h4><ul class="footer-links"><li><a href="mailto:snaong2000@yahoo.fr">snaong2000@yahoo.fr</a></li><li><a href="tel:+22997643716">(+229) 97 64 37 16</a></li><li>Quartier Gah, BP 193, Djougou</li></ul></div>
     </div>
     <div class="footer-bottom">
-      <span>© <span id="year"></span> SNA-ONG — Sud-Nord Actions. Tous droits réservés.</span>
+      <span>© <span id="year"></span> SNA-ONG - Sud-Nord Actions. Tous droits réservés.</span>
       <a href="https://wa.me/2290191175358" target="_blank" rel="noopener">Site conçu par DineTech</a>
     </div>
   </div>
@@ -315,7 +349,7 @@ footer{background:var(--navy-dark);color:var(--white);padding:70px 0 26px}
     {slug:"eau-ouake-2020", image:"hero.png", legende:"Extension du réseau d'eau vers Salangawa"}
   ];
   const FALLBACK_ACTUS = [
-    {titre:"Musiques et danses traditionnelles à l'honneur", date:"2019 — 2020", slug:"musiques-danses-2020"},
+    {titre:"Musiques et danses traditionnelles à l'honneur", date:"2019 - 2020", slug:"musiques-danses-2020"},
     {titre:"Eau potable pour deux écoles de Natitingou", date:"2021", slug:"eau-natitingou-2021"},
     {titre:"Extension du réseau d'eau vers Salangawa", date:"2020", slug:"eau-ouake-2020"}
   ];
@@ -441,7 +475,7 @@ footer{background:var(--navy-dark);color:var(--white);padding:70px 0 26px}
   }
 
   function updateSEO(actu, slug){
-    const title = actu ? `Galerie — ${actu.titre} — SNA-ONG` : `Galerie — SNA-ONG`;
+    const title = actu ? `Galerie - ${actu.titre} - SNA-ONG` : `Galerie - SNA-ONG`;
     const desc = actu ? `Photos de l'action : ${actu.titre}. Découvrez le travail de terrain de SNA-ONG.` : "Découvrez en images les actions de terrain de Sud-Nord Actions ONG.";
     const url = `https://www.snaong.org/galerie.html?slug=${encodeURIComponent(slug)}`;
     document.getElementById('page-title').textContent = title;
@@ -452,10 +486,10 @@ footer{background:var(--navy-dark);color:var(--white);padding:70px 0 26px}
     document.getElementById('og-url').setAttribute('content', url);
   }
   function resetSEO(){
-    document.getElementById('page-title').textContent = 'Galerie — SNA-ONG | Sud-Nord Actions';
+    document.getElementById('page-title').textContent = 'Galerie - SNA-ONG | Sud-Nord Actions';
     document.getElementById('meta-desc').setAttribute('content', "Découvrez en images les actions de terrain de Sud-Nord Actions ONG à Djougou : culture, santé, éducation, eau et développement communautaire.");
     document.getElementById('canonical-link').setAttribute('href', 'https://www.snaong.org/galerie.html');
-    document.getElementById('og-title').setAttribute('content', 'Galerie — SNA-ONG');
+    document.getElementById('og-title').setAttribute('content', 'Galerie - SNA-ONG');
     document.getElementById('og-desc').setAttribute('content', "Les actions de Sud-Nord Actions ONG en images, Djougou, Bénin.");
     document.getElementById('og-url').setAttribute('content', 'https://www.snaong.org/galerie.html');
   }
@@ -482,7 +516,7 @@ footer{background:var(--navy-dark);color:var(--white);padding:70px 0 26px}
     document.getElementById('btn-article').href = `actualites.html?slug=${encodeURIComponent(slug)}`;
     const shareUrl = `https://www.snaong.org/galerie.html?slug=${encodeURIComponent(slug)}`;
     const shareTitle = actu ? actu.titre : slug;
-    document.getElementById('btn-whatsapp').href = `https://wa.me/?text=${encodeURIComponent(shareTitle + ' — ' + shareUrl)}`;
+    document.getElementById('btn-whatsapp').href = `https://wa.me/?text=${encodeURIComponent(shareTitle + ' - ' + shareUrl)}`;
     document.getElementById('btn-facebook').href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
     document.getElementById('btn-copy').onclick = () => {
       navigator.clipboard.writeText(shareUrl).then(() => {
@@ -605,5 +639,30 @@ footer{background:var(--navy-dark);color:var(--white);padding:70px 0 26px}
 })();
 </script>
 
+<script>
+(function(){
+  var drops = document.querySelectorAll('.nav-drop');
+  function closeAll(except){
+    drops.forEach(function(d){
+      if(d !== except){
+        d.classList.remove('open');
+        d.querySelector('.nav-drop-btn').setAttribute('aria-expanded','false');
+      }
+    });
+  }
+  drops.forEach(function(d){
+    var btn = d.querySelector('.nav-drop-btn');
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var willOpen = !d.classList.contains('open');
+      closeAll(d);
+      d.classList.toggle('open', willOpen);
+      btn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+    });
+  });
+  document.addEventListener('click', function(){ closeAll(null); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeAll(null); });
+})();
+</script>
 </body>
 </html>

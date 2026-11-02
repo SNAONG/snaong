@@ -12,11 +12,11 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Faire un don — SNA-ONG | Sud-Nord Actions</title>
+<title>Faire un don - SNA-ONG | Sud-Nord Actions</title>
 <meta name="description" content="Soutenez Sud-Nord Actions ONG à Djougou, Bénin. Faites une proposition de don pour la culture, la santé, l'éducation, les droits humains ou l'eau.">
 <link rel="canonical" href="https://www.snaong.org/don.html">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Faire un don — SNA-ONG">
+<meta property="og:title" content="Faire un don - SNA-ONG">
 <meta property="og:description" content="Votre soutien change une vie, une goutte d'eau, un chant à la fois.">
 <meta property="og:image" content="https://www.snaong.org/hero.png">
 <link rel="icon" type="image/png" href="favicon.png">
@@ -29,7 +29,7 @@
   "@type": "FAQPage",
   "mainEntity": [
     {"@type":"Question","name":"Comment se fait le don concrètement ?","acceptedAnswer":{"@type":"Answer","text":"Vous remplissez le formulaire avec le montant et le domaine envisagés. Un email est envoyé à SNA-ONG, qui vous recontacte rapidement pour vous indiquer les modalités exactes de versement (virement, Mobile Money, etc.)."}},
-    {"@type":"Question","name":"Le don est-il déductible d'impôts ?","acceptedAnswer":{"@type":"Answer","text":"Cela dépend de votre pays de résidence et de la réglementation fiscale applicable. SNA-ONG peut vous fournir un reçu de don sur demande — précisez-le dans votre message."}},
+    {"@type":"Question","name":"Le don est-il déductible d'impôts ?","acceptedAnswer":{"@type":"Answer","text":"Cela dépend de votre pays de résidence et de la réglementation fiscale applicable. SNA-ONG peut vous fournir un reçu de don sur demande - précisez-le dans votre message."}},
     {"@type":"Question","name":"Puis-je donner autre chose que de l'argent ?","acceptedAnswer":{"@type":"Answer","text":"Oui, SNA-ONG accepte aussi les dons en nature (matériel, équipements) et le bénévolat de compétences. Indiquez-le dans le formulaire."}},
     {"@type":"Question","name":"Comment savoir où va mon argent ?","acceptedAnswer":{"@type":"Answer","text":"SNA-ONG est une organisation enregistrée et transparente dans sa gouvernance, avec un Trésorier Général et un Comité de Contrôle. Vous pouvez consulter nos statuts et suivre nos actualités pour voir l'impact concret de vos dons."}},
     {"@type":"Question","name":"Puis-je faire un don récurrent ?","acceptedAnswer":{"@type":"Answer","text":"Oui, précisez simplement 'don mensuel' ou 'don récurrent' dans le formulaire, et SNA-ONG vous accompagnera pour la mise en place."}}
@@ -195,6 +195,27 @@ footer{background:var(--navy-dark);color:var(--white);padding:70px 0 26px}
   .footer-grid{grid-template-columns:1fr;gap:28px}
   .amount-grid{grid-template-columns:repeat(3,1fr)}
 }
+/* Menu deroulant */
+.nav-drop{position:relative}
+.nav-drop-btn{display:flex;align-items:center;gap:7px;padding:10px 16px;font-family:inherit;font-size:14px;font-weight:500;color:var(--ink);background:none;border:none;border-radius:8px;cursor:pointer;transition:background .2s ease,color .2s ease}
+.nav-drop-btn svg{width:10px;height:10px;flex-shrink:0;transition:transform .25s ease}
+.nav-drop:hover .nav-drop-btn,.nav-drop.open .nav-drop-btn,.nav-drop.active .nav-drop-btn{background:var(--surface);color:var(--green)}
+.nav-drop.open .nav-drop-btn svg{transform:rotate(180deg)}
+.nav-sub{position:absolute;top:100%;left:0;min-width:200px;margin-top:6px;padding:8px;background:var(--white);border:1px solid var(--line);border-radius:12px;box-shadow:0 14px 40px rgba(15,35,64,.12);opacity:0;visibility:hidden;transform:translateY(6px);transition:opacity .2s ease,transform .2s ease,visibility .2s;z-index:1002}
+.nav-sub::before{content:"";position:absolute;left:0;right:0;top:-8px;height:8px}
+.nav-sub-link{display:block;padding:10px 14px;font-size:14px;font-weight:500;color:var(--ink);border-radius:8px;transition:background .2s ease,color .2s ease}
+.nav-sub-link:hover,.nav-sub-link.active{background:var(--surface);color:var(--green)}
+@media(min-width:681px){
+  .nav-drop:hover .nav-sub,.nav-drop:focus-within .nav-sub,.nav-drop.open .nav-sub{opacity:1;visibility:visible;transform:none}
+}
+@media(max-width:680px){
+  .nav-drop{display:block}
+  .nav-drop-btn{width:100%;justify-content:space-between;padding:12px 16px}
+  .nav-sub{position:static;min-width:0;margin:0;padding:0 0 0 12px;background:transparent;border:none;box-shadow:none;border-radius:0;opacity:1;visibility:visible;transform:none;max-height:0;overflow:hidden;transition:max-height .3s ease}
+  .nav-sub::before{display:none}
+  .nav-drop.open .nav-sub{max-height:300px}
+  .nav-drop.active .nav-sub{max-height:300px}
+}
 </style>
 </head>
 <body>
@@ -203,11 +224,24 @@ footer{background:var(--navy-dark);color:var(--white);padding:70px 0 26px}
   <div class="container header-inner">
     <a href="index.html" class="brand"><img src="logo.png" alt="SNA-ONG"><span class="brand-name">SNA-ONG</span></a>
     <nav id="nav-menu">
-      <a href="a-propos.html" class="nav-link">À propos</a>
-      <a href="statuts.html" class="nav-link">Statuts</a>
-      <a href="equipe.html" class="nav-link">Équipe</a>
-      <a href="actualites.html" class="nav-link">Actualités</a>
-      <a href="galerie.html" class="nav-link">Galerie</a>
+      <div class="nav-drop">
+        <button type="button" class="nav-drop-btn" aria-expanded="false" aria-haspopup="true">L'association<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="nav-sub">
+          <a href="a-propos.html" class="nav-sub-link">À propos</a>
+          <a href="statuts.html" class="nav-sub-link">Statuts</a>
+          <a href="equipe.html" class="nav-sub-link">Équipe</a>
+          <a href="documents.html" class="nav-sub-link">Documents</a>
+        </div>
+      </div>
+      <div class="nav-drop">
+        <button type="button" class="nav-drop-btn" aria-expanded="false" aria-haspopup="true">Nos actions<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="nav-sub">
+          <a href="projets.html" class="nav-sub-link">Projets</a>
+          <a href="actualites.html" class="nav-sub-link">Actualités</a>
+          <a href="galerie.html" class="nav-sub-link">Galerie</a>
+          <a href="volontariat.html" class="nav-sub-link">Volontariat</a>
+        </div>
+      </div>
       <a href="contact.html" class="nav-link">Contact</a>
       <a href="don.html" class="nav-cta">Faire un don</a>
     </nav>
@@ -310,7 +344,7 @@ footer{background:var(--navy-dark);color:var(--white);padding:70px 0 26px}
           Aperçu de votre don
         </div>
         <div class="preview-body">
-          <div class="preview-amount placeholder" id="pv-amount">— €</div>
+          <div class="preview-amount placeholder" id="pv-amount">- €</div>
           <div class="preview-freq" id="pv-freq">Ponctuel</div>
           <div class="preview-row"><span class="lbl">Domaine :</span><span class="val" id="pv-domaine">Là où le besoin est le plus grand</span></div>
           <div class="preview-row"><span class="lbl">Nom :</span><span class="val placeholder" id="pv-name">votre nom...</span></div>
@@ -344,7 +378,7 @@ footer{background:var(--navy-dark);color:var(--white);padding:70px 0 26px}
       </div>
       <div class="faq-item">
         <div class="faq-question"><span>Le don est-il déductible d'impôts ?</span><svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
-        <div class="faq-answer"><p>Cela dépend de votre pays de résidence et de la réglementation fiscale applicable. SNA-ONG peut vous fournir un reçu de don sur demande — précisez-le dans votre message.</p></div>
+        <div class="faq-answer"><p>Cela dépend de votre pays de résidence et de la réglementation fiscale applicable. SNA-ONG peut vous fournir un reçu de don sur demande - précisez-le dans votre message.</p></div>
       </div>
       <div class="faq-item">
         <div class="faq-question"><span>Puis-je donner autre chose que de l'argent ?</span><svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
@@ -374,14 +408,14 @@ footer{background:var(--navy-dark);color:var(--white);padding:70px 0 26px}
     <div class="footer-grid">
       <div class="footer-col">
         <div class="footer-brand"><img src="logo.png" alt="SNA-ONG"><span>SNA-ONG</span></div>
-        <p>Sud-Nord Actions ONG — culture, santé, éducation, droits humains et eau à Djougou, Bénin, depuis 1997.</p>
+        <p>Sud-Nord Actions ONG - culture, santé, éducation, droits humains et eau à Djougou, Bénin, depuis 1997.</p>
       </div>
-      <div class="footer-col"><h4 class="footer-title">Navigation</h4><ul class="footer-links"><li><a href="a-propos.html">À propos</a></li><li><a href="statuts.html">Statuts</a></li><li><a href="equipe.html">Équipe</a></li><li><a href="actualites.html">Actualités</a></li></ul></div>
-      <div class="footer-col"><h4 class="footer-title">Explorer</h4><ul class="footer-links"><li><a href="galerie.html">Galerie</a></li><li><a href="don.html">Faire un don</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="footer-col"><h4 class="footer-title">Navigation</h4><ul class="footer-links"><li><a href="a-propos.html">À propos</a></li><li><a href="statuts.html">Statuts</a></li><li><a href="equipe.html">Équipe</a></li><li><a href="documents.html">Documents</a></li><li><a href="projets.html">Projets</a></li></ul></div>
+      <div class="footer-col"><h4 class="footer-title">Explorer</h4><ul class="footer-links"><li><a href="actualites.html">Actualités</a></li><li><a href="galerie.html">Galerie</a></li><li><a href="volontariat.html">Volontariat</a></li><li><a href="don.html">Faire un don</a></li><li><a href="contact.html">Contact</a></li></ul></div>
       <div class="footer-col"><h4 class="footer-title">Contact</h4><ul class="footer-links"><li><a href="mailto:snaong2000@yahoo.fr">snaong2000@yahoo.fr</a></li><li><a href="tel:+22997643716">(+229) 97 64 37 16</a></li><li>Quartier Gah, BP 193, Djougou</li></ul></div>
     </div>
     <div class="footer-bottom">
-      <span>© <span id="year"></span> SNA-ONG — Sud-Nord Actions. Tous droits réservés.</span>
+      <span>© <span id="year"></span> SNA-ONG - Sud-Nord Actions. Tous droits réservés.</span>
       <a href="https://wa.me/2290191175358" target="_blank" rel="noopener">Site conçu par DineTech</a>
     </div>
   </div>
@@ -473,7 +507,7 @@ footer{background:var(--navy-dark);color:var(--white);padding:70px 0 26px}
   function updatePreview(){
     const pvAmount = document.getElementById('pv-amount');
     if(selectedAmount){ pvAmount.textContent = selectedAmount; pvAmount.classList.remove('placeholder'); }
-    else { pvAmount.textContent = '— €'; pvAmount.classList.add('placeholder'); }
+    else { pvAmount.textContent = '- €'; pvAmount.classList.add('placeholder'); }
 
     document.getElementById('pv-freq').textContent = selectedFreq;
     document.getElementById('pv-domaine').textContent = fDomaine.value;
@@ -506,7 +540,7 @@ footer{background:var(--navy-dark);color:var(--white);padding:70px 0 26px}
     const message = fMessage.value.trim();
 
     const body = `Nom : ${name}\nEmail : ${email}\nTéléphone : ${phone || 'non renseigné'}\n\nMontant envisagé : ${amount}\nFréquence : ${freq}\nDomaine à soutenir : ${domaine}\n\nMessage :\n${message || 'aucun'}`;
-    const subject = `Nouvelle proposition de don — ${name || 'Sans nom'}`;
+    const subject = `Nouvelle proposition de don - ${name || 'Sans nom'}`;
     const mailto = `mailto:snaong2000@yahoo.fr?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     window.location.href = mailto;
   });
@@ -535,5 +569,30 @@ footer{background:var(--navy-dark);color:var(--white);padding:70px 0 26px}
 })();
 </script>
 
+<script>
+(function(){
+  var drops = document.querySelectorAll('.nav-drop');
+  function closeAll(except){
+    drops.forEach(function(d){
+      if(d !== except){
+        d.classList.remove('open');
+        d.querySelector('.nav-drop-btn').setAttribute('aria-expanded','false');
+      }
+    });
+  }
+  drops.forEach(function(d){
+    var btn = d.querySelector('.nav-drop-btn');
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var willOpen = !d.classList.contains('open');
+      closeAll(d);
+      d.classList.toggle('open', willOpen);
+      btn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+    });
+  });
+  document.addEventListener('click', function(){ closeAll(null); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeAll(null); });
+})();
+</script>
 </body>
 </html>
