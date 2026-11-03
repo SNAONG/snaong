@@ -390,7 +390,7 @@ footer{background:var(--navy-dark);color:var(--white);padding:70px 0 26px}
           <input type="url" id="f-cv" placeholder="https://drive.google.com/...">
         </div>
         <div class="form-group">
-          <label for="f-message">Motivation</label>
+          <label for="f-message">Message de motivation</label>
           <textarea id="f-message" placeholder="Parlez-nous de vous et de ce qui vous donne envie de vous engager..." required></textarea>
         </div>
         <button type="submit" class="btn btn-solid" id="submit-btn"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>Envoyer ma candidature par email</button>
@@ -526,9 +526,15 @@ footer{background:var(--navy-dark);color:var(--white);padding:70px 0 26px}
       }).join('') + '</div>';
       root.querySelectorAll('button[data-i]').forEach(b => b.addEventListener('click', () => {
         select.value = MISSIONS[+b.dataset.i].titre;
+        applyTemplate(false);
         updatePreview();
         document.getElementById('candidature').scrollIntoView({behavior:'smooth'});
-        setTimeout(() => document.getElementById('f-name').focus({preventScroll:true}), 500);
+        setTimeout(() => {
+          f.message.focus({preventScroll:true});
+          const label = 'Ce qui me motive : ';
+          const pos = f.message.value.indexOf(label);
+          if(pos > -1) f.message.setSelectionRange(pos + label.length, pos + label.length);
+        }, 500);
       }));
     }
     select.innerHTML = '<option value="">Candidature spontanée</option>' + MISSIONS.map(m => `<option value="${esc(m.titre)}">${esc(m.titre)}</option>`).join('');
@@ -579,6 +585,25 @@ footer{background:var(--navy-dark);color:var(--white);padding:70px 0 26px}
   const pvSubject = document.getElementById('pv-subject');
   const pvMessage = document.getElementById('pv-message');
 
+  /* Message de depart : change selon la mission, n'ecrase jamais un texte deja modifie */
+  let autoText = '';
+  function template(titre){
+    const m = MISSIONS.find(x => x.titre === titre);
+    const where = m ? [m.lieu, m.duree].filter(Boolean).join(', ') : '';
+    const intro = m
+      ? `Je souhaite postuler à la mission « ${m.titre} »${where ? ' (' + where + ')' : ''}.`
+      : 'Je souhaite vous envoyer une candidature spontanée pour devenir volontaire au sein de SNA-ONG.';
+    return `Bonjour,\n\n${intro}\n\nCe qui me motive : \n\nMon parcours et mes compétences : \n\nJe reste disponible pour échanger avec vous.\n\nCordialement`;
+  }
+  function applyTemplate(force){
+    const cur = f.message.value;
+    if(force || !cur.trim() || cur === autoText){
+      autoText = template(f.mission.value);
+      f.message.value = autoText;
+    }
+  }
+  select.addEventListener('change', () => { applyTemplate(false); updatePreview(); });
+
   function subject(){
     const m = f.mission.value.trim();
     return m ? `Candidature volontariat - ${m}` : 'Candidature volontariat - candidature spontanée';
@@ -592,7 +617,7 @@ footer{background:var(--navy-dark);color:var(--white);padding:70px 0 26px}
     lines.push('Mission souhaitée : ' + (f.mission.value.trim() || 'Candidature spontanée'));
     if(f.dispo.value.trim()) lines.push('Disponibilité : ' + f.dispo.value.trim());
     if(f.cv.value.trim()) lines.push('Lien vers le CV : ' + f.cv.value.trim());
-    lines.push('', 'Motivation :', f.message.value.trim());
+    lines.push('', f.message.value.trim());
     return lines.join('\n');
   }
   function updatePreview(){
@@ -616,6 +641,7 @@ footer{background:var(--navy-dark);color:var(--white);padding:70px 0 26px}
     const required = [f.name, f.email, f.country, f.message];
     const missing = required.find(el => !el.value.trim());
     if(missing){ missing.focus(); showToast('Merci de remplir les champs obligatoires'); return; }
+    if(f.message.value.trim() === autoText.trim()){ f.message.focus(); showToast('Complétez votre message avant d\'envoyer'); return; }
     if(!f.email.checkValidity()){ f.email.focus(); showToast('Adresse email invalide'); return; }
     if(f.cv.value.trim() && !f.cv.checkValidity()){ f.cv.focus(); showToast('Le lien du CV doit commencer par https://'); return; }
     window.location.href = `mailto:${MAIL_TO}?subject=${encodeURIComponent(subject())}&body=${encodeURIComponent(body())}`;
