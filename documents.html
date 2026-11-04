@@ -203,6 +203,18 @@ footer{background:var(--navy-dark);color:var(--white);padding:70px 0 26px}
 .doc-read svg{width:18px;height:18px}
 
 /* Lecteur */
+.doc-text{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:32px;margin-bottom:28px}
+.doc-text.has-stat{display:grid;grid-template-columns:200px 1fr;gap:36px;align-items:center}
+.doc-stat{text-align:center;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:26px 16px}
+.doc-stat strong{display:block;font-family:var(--disp);font-weight:700;font-size:60px;line-height:1;color:var(--green)}
+.doc-stat span{display:block;margin-top:10px;font-size:13px;font-weight:600;color:var(--navy);line-height:1.4}
+.doc-text h3{font-family:var(--disp);font-weight:700;font-size:22px;color:var(--navy);margin-bottom:14px}
+.doc-text p{font-size:15px;color:var(--text);line-height:1.75;margin-bottom:14px}
+.doc-text ul{margin:0 0 14px;padding:0;list-style:none;display:grid;gap:8px}
+.doc-text li{position:relative;padding-left:24px;font-size:15px;color:var(--text);line-height:1.6}
+.doc-text li::before{content:"";position:absolute;left:0;top:.6em;width:8px;height:8px;border-radius:50%;background:var(--green)}
+.doc-text-body > :last-child{margin-bottom:0}
+@media(max-width:680px){.doc-text{padding:24px 20px}.doc-text.has-stat{grid-template-columns:1fr;gap:22px}}
 .reader{position:fixed;inset:0;z-index:2500;display:none;flex-direction:column;background:rgba(15,35,64,.94)}
 .reader.open{display:flex}
 .reader-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 22px;background:var(--navy-dark);color:var(--white)}
@@ -372,13 +384,14 @@ body.reader-open{overflow:hidden}
     const rows = parseCSV(text);
     if(rows.length < 2) return null;
     const headers = rows[0].map(h => h.trim().toLowerCase());
-    const col = name => headers.indexOf(name);
-    const idx = {titre:col('titre'), categorie:col('categorie'), annee:col('annee'), description:col('description'), lien:col('lien')};
-    if(idx.titre === -1 || idx.lien === -1) return null;
+    const col = (...names) => { for(const n of names){ const i = headers.indexOf(n); if(i !== -1) return i; } return -1; };
+    const idx = {titre:col('titre'), categorie:col('categorie','catégorie'), annee:col('annee','année'), description:col('description'), lien:col('lien'), chiffre:col('chiffre'), legende:col('legende','légende')};
+    if(idx.titre === -1) return null;
     const get = (r, i) => i === -1 ? '' : (r[i] || '').trim();
-    return rows.slice(1).map(r => {
+    const docs = [], texts = [];
+    rows.slice(1).forEach(r => {
       const categorie = get(r, idx.categorie);
-      return {
+      const d = {
         titre:get(r, idx.titre),
         categorie:categorie,
         cat:catKey(categorie),
@@ -387,7 +400,15 @@ body.reader-open{overflow:hidden}
         description:get(r, idx.description),
         lien:get(r, idx.lien)
       };
-    }).filter(d => d.titre && /^https?:\/\//i.test(d.lien));
+      if(!d.titre) return;
+      if(/^https?:\/\//i.test(d.lien)) docs.push(d);
+      else if(d.description){
+        d.chiffre = get(r, idx.chiffre);
+        d.legende = get(r, idx.legende);
+        texts.push(d);
+      }
+    });
+    return {docs:docs, texts:texts};
   }
 
   function yearValue(a){
@@ -405,14 +426,17 @@ body.reader-open{overflow:hidden}
   }
 
   let DOCS = [];
+  let TEXTS = [];
   let current = 'all';
 
   function groups(){
     const map = new Map();
-    DOCS.forEach(d => {
-      if(!map.has(d.cat)) map.set(d.cat, {key:d.cat, label:CAT_LABEL[d.cat] || d.catRaw || 'Autres documents', tab:CAT_TAB[d.cat] || d.catRaw || 'Autres', items:[]});
-      map.get(d.cat).items.push(d);
-    });
+    const bucket = (d) => {
+      if(!map.has(d.cat)) map.set(d.cat, {key:d.cat, label:CAT_LABEL[d.cat] || d.catRaw || 'Autres documents', tab:CAT_TAB[d.cat] || d.catRaw || 'Autres', items:[], texts:[]});
+      return map.get(d.cat);
+    };
+    DOCS.forEach(d => bucket(d).items.push(d));
+    TEXTS.forEach(t => bucket(t).texts.push(t));
     const list = [...map.values()];
     list.forEach(g => g.items.sort((a, b) => yearValue(b.annee) - yearValue(a.annee)));
     list.sort((a, b) => {
@@ -420,6 +444,34 @@ body.reader-open{overflow:hidden}
       return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib);
     });
     return list;
+  }
+
+  /* Texte affiche directement : paragraphes (ligne vide) et listes (lignes commencant par "- ") */
+  function textHTML(desc){
+    return String(desc).replace(/\r/g,'').split(/\n\s*\n/).map(b => {
+      const lines = b.split('\n').map(l => l.trim()).filter(Boolean);
+      let html = '', list = [], para = [];
+      const flushList = () => { if(list.length){ html += '<ul>' + list.map(li => '<li>' + esc(li) + '</li>').join('') + '</ul>'; list = []; } };
+      const flushPara = () => { if(para.length){ html += '<p>' + para.map(esc).join('<br>') + '</p>'; para = []; } };
+      lines.forEach(l => {
+        const m = l.match(/^[-•*]\s+(.*)$/);
+        if(m){ flushPara(); list.push(m[1]); } else { flushList(); para.push(l); }
+      });
+      flushPara(); flushList();
+      return html;
+    }).join('');
+  }
+
+  function textBlock(t){
+    const stat = t.chiffre ? `<div class="doc-stat"><strong>${esc(t.chiffre)}</strong>${t.legende ? `<span>${esc(t.legende)}</span>` : ''}</div>` : '';
+    return `
+      <article class="doc-text${stat ? ' has-stat' : ''}">
+        ${stat}
+        <div class="doc-text-body">
+          <h3>${esc(t.titre)}</h3>
+          ${textHTML(t.description)}
+        </div>
+      </article>`;
   }
 
   function card(d){
@@ -452,8 +504,9 @@ body.reader-open{overflow:hidden}
     const shown = current === 'all' ? gs : gs.filter(g => g.key === current);
     root.innerHTML = shown.map(g => `
       <div class="doc-block">
-        <h2 class="doc-block-title">${esc(g.label)}<span class="doc-count">${g.items.length}</span></h2>
-        <div class="docs-grid">${g.items.map(card).join('')}</div>
+        <h2 class="doc-block-title">${esc(g.label)}${g.items.length ? `<span class="doc-count">${g.items.length}</span>` : ''}</h2>
+        ${g.texts.map(textBlock).join('')}
+        ${g.items.length ? `<div class="docs-grid">${g.items.map(card).join('')}</div>` : ''}
       </div>`).join('');
     root.querySelectorAll('.doc-read').forEach(b => b.addEventListener('click', () => openReader(DOCS[+b.dataset.i])));
   }
@@ -478,7 +531,7 @@ body.reader-open{overflow:hidden}
 
   fetch(SHEET_CSV_URL)
     .then(r => { if(!r.ok) throw new Error('fetch failed'); return r.text(); })
-    .then(text => { DOCS = csvToDocs(text) || []; render(); })
+    .then(text => { const res = csvToDocs(text) || {docs:[], texts:[]}; DOCS = res.docs; TEXTS = res.texts; render(); })
     .catch(() => {
       document.getElementById('doc-tabs').innerHTML = '';
       document.getElementById('docs-root').innerHTML = '<div class="empty-state">Impossible de charger les documents pour le moment. Réessayez dans quelques instants.</div>';
